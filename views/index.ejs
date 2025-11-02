@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="个人网站 - 展示个人作品和动态">
+    <title><%= siteTitle || '个人网站' %></title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar" role="navigation" aria-label="主导航">
+        <div class="nav-container">
+            <div id="site-title" class="logo" role="banner"><%= siteTitle || '我的个人网站' %></div>
+            <button id="mobileMenuBtn" class="mobile-menu-btn" type="button" aria-label="菜单" aria-expanded="false">
+                <span class="menu-icon"></span>
+                <span class="menu-icon"></span>
+                <span class="menu-icon"></span>
+            </button>
+            <div class="nav-links" id="navLinks">
+                <a href="/" class="nav-link active" aria-current="page" data-nav="home">首页</a>
+                <a href="/#posts" class="nav-link" data-nav="posts">说说</a>
+                <button id="loginBtn" class="login-btn" type="button" aria-label="登录">登录</button>
+                <button id="logoutBtn" class="logout-btn" type="button" aria-label="退出登录" style="display: none;">退出</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主题切换器 -->
+    <div id="theme-switcher" class="theme-switcher" role="group" aria-label="主题切换">
+        <button class="theme-btn" data-theme="cute" type="button" aria-label="切换到可爱风主题">可爱风</button>
+        <button class="theme-btn" data-theme="depressed" type="button" aria-label="切换到抑郁风主题">抑郁风</button>
+        <button class="theme-btn" data-theme="sunny" type="button" aria-label="切换到阳光风主题">阳光风</button>
+        <button class="theme-btn" data-theme="starry" type="button" aria-label="切换到星月夜主题">星月夜</button>
+    </div>
+
+    <!-- 主题字大横幅 -->
+    <section id="home" class="hero-banner">
+        <h1 id="heroTitle" class="hero-title editable" contenteditable="false" data-key="heroTitle">欢迎来到我的世界</h1>
+    </section>
+
+    <!-- 功能1区域：图片轮播和介绍文字 -->
+    <section class="feature-section feature-1">
+        <div class="feature-container">
+            <div class="carousel-wrapper">
+                <div class="carousel-container">
+                    <div class="carousel-slides" id="carouselSlides">
+                        <!-- 轮播图片将通过JavaScript动态插入 -->
+                    </div>
+                    <!-- 导航箭头 -->
+                    <button class="carousel-nav-btn carousel-prev-btn" id="carouselPrevBtn" type="button" aria-label="上一张">
+                        <span class="carousel-arrow">‹</span>
+                    </button>
+                    <button class="carousel-nav-btn carousel-next-btn" id="carouselNextBtn" type="button" aria-label="下一张">
+                        <span class="carousel-arrow">›</span>
+                    </button>
+                    <!-- 指示器 -->
+                    <div class="carousel-indicators" id="carouselIndicators" role="tablist">
+                        <!-- 指示器小圆点将通过JavaScript动态生成 -->
+                    </div>
+                </div>
+                <button id="uploadImageBtn" class="edit-btn" type="button" aria-label="更改照片" style="display: none;">更改照片</button>
+            </div>
+            <div class="feature-content">
+                <h2 id="featureTitle" class="feature-title editable" contenteditable="false" data-key="featureTitle">功能介绍</h2>
+                <p id="featureText" class="feature-text editable" contenteditable="false" data-key="featureText">这里是功能1的介绍文字，你可以在这里介绍你的网站特色或主要内容。登录后点击编辑按钮即可修改这些内容。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 功能2区域：说说 -->
+    <section id="posts" class="feature-section feature-2">
+        <div class="timeline-container">
+            <h2 class="timeline-title">说说</h2>
+            
+            <!-- 发布说说区域（仅登录用户可见） -->
+            <div id="publishSection" class="publish-section" style="display: none;">
+                <form id="timelinePostForm" class="timeline-post-form">
+                    <textarea id="timelinePostText" class="timeline-post-input" placeholder="分享你的想法..." rows="4" required aria-label="发布说说内容"></textarea>
+                    <div class="timeline-image-upload">
+                        <label for="timelinePostImage" class="image-upload-label">
+                            <span>📷 添加图片（可选）</span>
+                        </label>
+                        <input type="file" id="timelinePostImage" accept="image/*" aria-label="上传图片">
+                        <img id="timelinePostImagePreview" class="image-preview" style="display: none;" alt="图片预览">
+                    </div>
+                    <button type="submit" class="btn-primary timeline-publish-btn" aria-label="发布说说">发布</button>
+                </form>
+            </div>
+            
+            <div id="timelinePosts" class="timeline-posts">
+                <!-- 说说动态内容 -->
+            </div>
+        </div>
+    </section>
+
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>官方渠道</h3>
+                <div class="social-links">
+                    <a href="#" id="socialWeibo" class="social-link editable" contenteditable="false" data-key="socialWeibo">微博</a>
+                    <a href="#" id="socialGitHub" class="social-link editable" contenteditable="false" data-key="socialGitHub">GitHub</a>
+                    <a href="#" id="socialEmail" class="social-link editable" contenteditable="false" data-key="socialEmail">邮箱</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>留言板</h3>
+                <div class="message-board">
+                    <textarea id="messageInput" class="message-input" placeholder="写下你的留言..." aria-label="留言内容输入框" maxlength="500"></textarea>
+                    <button id="submitMessage" class="btn-primary" type="button" aria-label="提交留言">提交留言</button>
+                    <div id="messagesList" class="messages-list"></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 登录模态框 -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <button type="button" class="close" aria-label="关闭">&times;</button>
+            <h2>登录</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">账号：</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">密码：</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="btn-primary">登录</button>
+                <p id="loginError" class="error-message"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- 发布动态模态框 -->
+    <div id="postModal" class="modal">
+        <div class="modal-content">
+            <button type="button" class="close" aria-label="关闭">&times;</button>
+            <h2>发布新动态</h2>
+            <form id="postForm">
+                <div class="form-group">
+                    <label for="postText">说说内容：</label>
+                    <textarea id="postText" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="postImage">图片（可选）：</label>
+                    <input type="file" id="postImage" accept="image/*">
+                    <img id="postImagePreview" class="image-preview" style="display: none;">
+                </div>
+                <button type="submit" class="btn-primary">发布</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 轮播图管理模态框 -->
+    <div id="carouselManageModal" class="modal">
+        <div class="modal-content" style="max-width: 900px;">
+            <button type="button" class="close" aria-label="关闭">&times;</button>
+            <h2>更改照片</h2>
+            <div class="carousel-manage-container">
+                <div class="carousel-manage-actions">
+                    <label for="carouselImageUpload" class="btn-primary" style="cursor: pointer; display: inline-block; margin-bottom: 1rem;">
+                        📷 添加图片
+                    </label>
+                    <input type="file" id="carouselImageUpload" accept="image/*" multiple style="display: none;">
+                </div>
+                <div id="carouselImageList" class="carousel-image-list">
+                    <!-- 轮播图片列表将在这里动态生成 -->
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button type="button" id="saveCarouselBtn" class="btn-primary">保存更改</button>
+                <button type="button" id="cancelCarouselBtn" class="btn-secondary">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 信封图标（仅登录后显示） -->
+    <button id="envelopeIcon" class="envelope-icon" type="button" aria-label="查看信件" style="display: none;">
+        ✉️
+    </button>
+
+    <!-- 信封模态框 -->
+    <div id="envelopeModal" class="modal">
+        <div class="modal-content envelope-modal-content">
+            <button type="button" class="close" aria-label="关闭">&times;</button>
+            <h2 class="envelope-title">信</h2>
+            <div class="envelope-text">
+                <p>emmmm，这是一封信，只是想说点，当然了，既然我敢说其实就已经放下了，貌似初中的时候就挺喜欢你的，后来以外联系不到的时候意外认识了你高中同学，听见文山的，又是纯文的，就问，你知道lwj吗。当然了，自那以后我也什么都没做，顶多陪你玩了玩游戏，我也没有明确的跟你说过我的想法，之前想去找你玩的时候我想带点东西的，可惜最后没去成。因为我比较喜欢emm命运这些东西，再认识的时候我觉得好有缘分，但是前一阵子我觉得再认识，是不想让我一直想之前的事情，你不要有心理压力，看完以后点销毁忘记就好了，销毁以后这个emm信就会没了，只是想告诉你之前有人喜欢过你，你也不需要说什么，就这样可以了。（不要跟别人说啊，社恐。）</p>
+            </div>
+            <div class="modal-actions" style="margin-top: 2rem;">
+                <button type="button" id="destroyEnvelopeBtn" class="btn-primary">销毁</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/script.js"></script>
+</body>
+</html>
+
